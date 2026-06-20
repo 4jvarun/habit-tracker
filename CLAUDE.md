@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git workflow
+
+Commit and push to GitHub regularly — after every meaningful change, not just when asked. This repo is the user's backup/rollback point, so uncommitted or unpushed work defeats the purpose.
+
+- Remote: `origin` → `https://github.com/4jvarun/habit-tracker.git`, branch `master`.
+- After finishing a change (a feature, a fix, a notable edit), stage it, commit with a clear message describing *why* the change was made, and `git push` right away.
+- Don't batch up multiple unrelated changes into one commit — commit each logical change separately.
+- Still follow standard git safety: no force-push, no amending commits already pushed, ask before any destructive operation (`reset --hard`, history rewrites, etc.).
+
 ## Commands
 
 ```bash
@@ -27,7 +36,3 @@ Single-page habit tracker: React 19 + TypeScript + Vite, styled with Tailwind CS
 **Per-habit color/emoji:** `src/constants.ts` defines the preset `HABIT_EMOJIS` list and `HABIT_COLORS` palette (hex values) offered in `HabitForm`. Because each habit's color is chosen at runtime, it's applied via inline `style` (not Tailwind utility classes like `bg-green-600`) in `HabitItem` and `HabitForm` — Tailwind's static scanner can't pick up dynamically-constructed class names, so any new per-habit visual styling driven by `habit.color` must use inline styles, not class-name string-building.
 
 **Removal:** deleting a habit (`HabitItem`'s trash icon) goes through a native `window.confirm` before calling `onDelete`, since it permanently discards that habit's `completedDates` history.
-
-## Workflow
-
-The user wants all work committed and pushed to GitHub regularly (remote `origin`, branch `master`) so it can always be rolled back — commit completed changes with clear messages and push as part of finishing a task, not just on request.
